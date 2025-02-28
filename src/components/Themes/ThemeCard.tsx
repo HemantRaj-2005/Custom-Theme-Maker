@@ -1,4 +1,3 @@
-import React from "react";
 import { Theme } from "@/lib/themes";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";

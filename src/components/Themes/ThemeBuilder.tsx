@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useThemeStore } from "@/store/theme-store";
 import { Theme, fontOptions } from "@/lib/themes";
 import { Button } from "@/components/ui/button";

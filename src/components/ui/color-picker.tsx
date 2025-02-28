@@ -1,11 +1,16 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-interface ColorPickerProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface ColorPickerProps {
   label?: string;
   value: string;
   onChange: (value: string) => void;
   className?: string;
+  name?: string;
+  disabled?: boolean;
+  form?: string;
+  list?: string;
+  required?: boolean;
 }
 
 const ColorPicker = React.forwardRef<HTMLInputElement, ColorPickerProps>(

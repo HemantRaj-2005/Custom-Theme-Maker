@@ -1,5 +1,3 @@
-import { type ClassValue } from "clsx";
-
 export type Theme = {
   id: string;
   name: string;
@@ -358,6 +356,7 @@ export const fontOptions = [
   "Georgia",
   "Verdana",
   "Courier New",
+  "Ink Free",
 ];
 
 export function hexToHsl(hex: string): [number, number, number] {

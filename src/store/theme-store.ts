@@ -6,7 +6,7 @@ interface ThemeState {
   currentTheme: Theme;
   customThemes: Theme[];
   setTheme: (themeId: string) => void;
-  addCustomTheme: (theme: Theme) => void;
+  addCustomTheme: (theme: Theme) => Theme;
   updateCustomTheme: (theme: Theme) => void;
   deleteCustomTheme: (themeId: string) => void;
 }
@@ -20,7 +20,6 @@ export const useThemeStore = create<ThemeState>()(
       setTheme: (themeId: string) => {
         const { customThemes } = get();
         
-        // First check predefined themes
         const predefinedTheme = predefinedThemes.find(theme => theme.id === themeId);
         
         if (predefinedTheme) {
@@ -29,7 +28,6 @@ export const useThemeStore = create<ThemeState>()(
           return;
         }
         
-        // Then check custom themes
         const customTheme = customThemes.find(theme => theme.id === themeId);
         
         if (customTheme) {
@@ -38,7 +36,6 @@ export const useThemeStore = create<ThemeState>()(
           return;
         }
         
-        // Fallback to default theme if not found
         applyTheme(defaultTheme);
         set({ currentTheme: defaultTheme });
       },
@@ -46,7 +43,6 @@ export const useThemeStore = create<ThemeState>()(
       addCustomTheme: (theme: Theme) => {
         const { customThemes } = get();
         
-        // Generate a unique ID if not provided
         if (!theme.id) {
           theme.id = `custom-${Date.now()}`;
         }
@@ -92,7 +88,6 @@ export const useThemeStore = create<ThemeState>()(
         const updatedThemes = customThemes.filter(theme => theme.id !== themeId);
         set({ customThemes: updatedThemes });
         
-        // If the current theme is being deleted, switch to default
         if (currentTheme.id === themeId) {
           applyTheme(defaultTheme);
           set({ currentTheme: defaultTheme });
@@ -101,7 +96,7 @@ export const useThemeStore = create<ThemeState>()(
     }),
     {
       name: 'theme-storage',
-      onRehydrateStorage: (state) => {
+      onRehydrateStorage: () => {
         // Apply the saved theme when the store is rehydrated
         return (rehydratedState, error) => {
           if (error) {
