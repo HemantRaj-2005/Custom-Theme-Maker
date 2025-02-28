@@ -15,7 +15,6 @@ interface ThemeCardProps {
 export function ThemeCard({ theme, isActive, onSelect }: ThemeCardProps) {
   const { deleteCustomTheme, customThemes } = useThemeStore();
   const isCustom = customThemes.some(t => t.id === theme.id);
-  const isPredefined = predefinedThemes.some(t => t.id === theme.id);
 
   return (
     <div
